@@ -1,0 +1,92 @@
+<div id="disableview" [class.disableCtrl]="disableView">
+    <div [@routerTransition]>
+        <app-page-header [heading]="Users" [icon]="'fa-list'"></app-page-header>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">{{ 'Users.Title' | translate }}
+                    </div>
+                    <!-- Large modal -->
+                    <div class="card-body">
+                        <div class='table-responsive'>
+                            <div class="alert alert-info" role="alert" *ngIf="indLoading">
+                                <img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+                            <div *ngIf='news && news.length==0' class="alert alert-info" role="alert">No record found!</div>
+                            <table class="table table-bordered" (window:scroll)="onScroll($event)" #myDiv ngDefaultControl>
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'Users.Id' | translate }}</th>
+                                        <th>{{ 'Users.Email' | translate }}</th>
+                                        <th>{{ 'CreatedBy' | translate }}</th>
+                                        <th>{{ 'CreatedDate' | translate }}</th>
+                                        <th>{{ 'ModifiedBy' | translate }}</th>
+                                        <th>{{ 'ModifiedDate' | translate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let item of list">
+                                        <td>{{item._id}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.CreatedBy}}</td>
+                                        <td>{{item.CreatedDate | date:'medium'}}</td>
+                                        <td> {{item.ModifiedBy}}</td>
+                                        <td>{{item.ModifiedDate| date:'medium'}}</td>
+                                        <td>
+                                            <a class="fa fa-user" title="{{ 'Users.MapRole' | translate }}" [routerLink]="['/adminLayout/settings/maprole',{_id:item._id,user:item.email,type:'user'}]"></a>
+                                            <a title="View" class="fa fa-search" (click)="open(content);viewUser(item._id);"></a>
+                                            <!-- <a title="Delete" class="fa fa-trash" (click)="deleteCustomer(index,cust._id);"></a> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'Users.TitleView' | translate }}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>{{ 'Users.Email' | translate }} : </label>
+                    <span>{{ data.email}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'Users.Provider' | translate }} : </label>
+                    <span>{{ data.provider}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'CreatedBy' | translate }} : </label>
+                    <span>{{ data.CreatedBy}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'CreatedDate' | translate }} : </label>
+                    <span>{{ data.CreatedDate | date:'medium'}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'ModifiedBy' | translate }} : </label>
+                    <span>{{ data.ModifiedBy}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'ModifiedDate' | translate }} : </label>
+                    <span>{{ data.ModifiedDate | date:'medium'}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{ 'Users.Active' | translate }} : </label>
+                    <span>{{ data.Active}}</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

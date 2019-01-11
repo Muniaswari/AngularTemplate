@@ -1,0 +1,77 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Master'" [icon]="'fa-list'">
+        Master
+    </app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">Master
+                    <div class="btn-group btn-group-sm pull-right" [hidden]="category" role="group" aria-label="">
+                        <a class="btn btn-success" href="Javascript:void(0)" [routerLink]="['/adminLayout/settings/masterform']">
+                            <i class="fa fa-plus"></i>
+                        </a>
+
+                        <a class="btn btn-danger" href="Javascript:void(0)"
+                         (click)="delete()">
+                            <i class=" fa fa-trash"></i>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <search (searchEvent)="search($event)" [fields]="fields" 
+                    [Total]="constants.RecordTotal"></search>
+                <br>
+                    <!-- <div class="alert alert-info" role="alert" *ngIf="indLoading">
+                        <img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+                    <div *ngIf='list && list.length==0' class="alert alert-info" role="alert">No record found!</div> -->
+
+                    <table class="table table-striped" (window:scroll)="onScroll($event)">
+                        <thead id='tbleHead'>
+                            <tr>
+                                <th><a href="Javascript:void(0)"> <i class="fa fa-edit"></i>
+                                    </a></th>
+                                <th scope="col">
+                                    <input type="checkbox" id="chkSelectAll" (change)="selectAll($event.target.checked)" />
+                                </th>
+                                <th>Sl.No.</th>
+                                <th scope="col">{{ 'Master.FormName' | translate }}</th>
+                                <th scope="col">{{ 'Master.Type' | translate }}</th>
+                                <th scope="col">{{ 'CreatedBy' | translate }}</th>
+                                <th scope="col">{{ 'CreatedDate' | translate }}</th>
+                                <th scope="col">{{ 'ModifiedBy' | translate }}</th>
+                                <th scope="col">{{ 'ModifiedDate' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyList">
+                            <tr *ngFor="let item of list; let i=index">
+                                <td>
+                                    <a [routerLink]="['/adminLayout/settings/masterform',{_id:item._id}]">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="chkTbl" name="chkTbl" id="chk{{item._id}}" [checked]="IschkTbl"
+                                        (change)="selectRow($event.target)" value="{{item._id}}" /> </td>
+                                <td>{{i + 1}}</td>
+                                <td>
+                                    <a *ngIf="item.IsForm" class="fa fa-list" title="{{ 'FormView' | translate }}"
+                                        [routerLink]="['/adminLayout/settings/fieldsettings',{_id:item._id,FormName:item.FormName}]"></a>
+                                    {{item.FormName}}</td>
+                                <td>
+                                    <span *ngIf="item.IsForm">Form</span>
+                                    <span *ngIf="item.IsData">Data</span>
+                                    <span *ngIf="!item.IsForm && !item.IsData">-</span>
+                                </td>
+                                <td>{{item.CreatedBy}}</td>
+                                <td>{{item.CreatedDate | date:'medium'}}</td>
+                                <td> {{item.Modified[0]?.ModifiedBy}}</td>
+                                <td>{{item.Modified[0]?.ModifiedDate| date:'medium'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

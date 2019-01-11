@@ -1,0 +1,12 @@
+::1 /adminLayout/settings/masterform;_id=1 GET HTTP/1.1 200 1015 Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 21.247 ms
+::1 /runtime.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 19.491 ms
+::1 /scripts.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 20.950 ms
+::1 /polyfills.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 21.469 ms
+::1 /main.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 20.692 ms
+::1 /styles.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 20.953 ms
+::1 /vendor.js GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 20.892 ms
+::1 /assets/i18n/en.json GET HTTP/1.1 200 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 2.776 ms
+::1 /api/master/findById/1 GET HTTP/1.1 304 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 175.323 ms
+::1 /fontawesome-webfont.woff2?v=4.7.0 GET HTTP/1.1 200 77160 Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 1.067 ms
+::1 /favicon.ico GET HTTP/1.1 200 5430 Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 7.708 ms
+::1 /api/role/findPageWise/1/undefined/undefined GET HTTP/1.1 304 - Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 16.332 ms

@@ -1,0 +1,62 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Master'" [icon]="'fa-list'">
+        Menu
+    </app-page-header>
+    <div class="card">
+        <div class="card-header bg-info text-white">Master
+            <div class="btn-group btn-group-sm pull-right" [hidden]="category" role="group" aria-label="">
+                <a class="btn btn-success" href="Javascript:void(0)" [routerLink]="['/adminLayout/idsettings/idsettingssetup']">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <a class="btn btn-danger" href="Javascript:void(0)" (click)="delete()">
+                    <i class=" fa fa-trash"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table" style="text-overflow:ellipsis;">
+                        <thead>
+                            <tr>
+                                <th><a href="Javascript:void(0)"> <i class="fa fa-edit"></i> </a></th>
+                                <th scope="col">
+                                    <input type="checkbox" id="chkSelectAll" (change)="selectAll($event.target.checked)" />
+                                </th>
+                                <th style="width:250px;" >Name</th>
+                                <th>Created By</th>
+                                <th>Last Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyList"> <tr *ngFor="let item of list; let i=index">
+                            <td>
+                                        <a class="fa fa-edit" title="Edit"
+                                         [routerLink]="['/adminLayout/idsettings/idsettingssetup',{_id:item._id}]">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="chkTbl" name="chkTbl" id="chk{{item._id}}"
+                                            [checked]="IschkTbl" (change)="selectRow($event.target)" value="{{item._id}}" />
+                                    </td>
+                                    <td style="width:10px" attr.data-target=".row{{item._id}}" data-toggle="collapse"
+                                        data-role="expander">
+                                        <span *ngIf="item.SubMenu?.length && item.SubMenu[0].MenuName!==undefined"
+                                            class="fa fa-plus" (click)="toggleChildren($event)">
+                                        </span>&nbsp;{{ item.MenuName }}
+                                    </td>
+                                    <td>{{ item.CreatedBy }}</td>
+                                    <td>{{ item.CreatedDate| date:'medium' }}</td>
+
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- https://getbootstrap.com/docs/4.0/components/collapse/#multiple-targets
+https://www.bootply.com/oxKYaxmDYF
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
+    aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button> -->

@@ -1,0 +1,511 @@
+
+db.nodes.aggregate([
+    {$match: {
+            "nodeKey": 1
+        }
+    },
+    {$graphLookup : {
+        from            : "nodes",
+        startWith       : "$children",
+        connectFromField: "children",
+        connectToField  : "nodeKey",
+        maxDepth        : 5,
+        as              : "child"
+        }
+    },
+    {$unwind: "$child"
+    },
+    {$replaceRoot: {newRoot: "$child"
+        }
+    },
+    {$graphLookup : {
+        from            : "nodes",
+        startWith       : "$parents",
+        connectFromField: "parents",
+        connectToField  : "nodeKey",
+        maxDepth        : 5,
+        as              : "parent"
+        }
+    },
+    {$project: {
+         _id           : 0,
+         parentNodeKey : "$parent.nodeKey",
+         parentLabel   : "$parent.label",
+         nodeLabel     : "$label",
+         nodeKey       : 1
+        }
+    }
+]);
+
+
+
+db.menus.aggregate([
+    { $match: { ParentId: 0
+        }
+    },
+    {
+        $graphLookup: {
+            from: "menus",
+            startWith: "$_id",
+            connectFromField: "_id",
+            connectToField: "ParentId",
+            as: "SubMenu"
+        }
+    },
+    { $sort: { MenuName: 1
+        }
+    }
+])
+
+
+
+db.menus.aggregate([
+    {
+        $graphLookup: {
+        from: "menus",
+            "startWith": "$_id",
+            "connectFromField": "_id",
+            "connectToField": "ParentId",
+            "as": "subPages",
+            "maxDepth": 5,
+            "depthField": "depth"
+        }
+    },
+    {
+        "$match": {
+            "ParentId": 0
+        }
+    }
+])
+
+db.menus.aggregate([
+    {$unwind: {
+                        path: "$ParentId", 
+                        preserveNullAndEmptyArrays: true
+        }
+    },
+    {$graphLookup: {
+                from : "menus", 
+                startWith : "$_id", 
+                connectFromField : "_id", 
+                connectToField : "ParentId", 
+                as : "myparents"
+        }
+    },
+    {$match: {
+            "_id": 5
+        }
+    }
+])
+
+
+db.menus.aggregate([
+    // { "$match": { "_id": 5 } },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "childs"
+        }
+    },
+    {
+        "$unwind": "$childs"
+    },
+    // { "$match": { "childs.value": "1" } },
+    {
+        "$group": {
+            "_id": "$_id",
+            //    "_id": { "$first": "$_id" },
+            //  "value": { "$first": "$value" },
+            "ParentId": {
+                "$first": "$ParentId"
+            },
+            "childs": {
+                "$push": "$childs"
+            }
+        }
+    }
+])
+
+
+
+db.menus.aggregate([
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "childs"
+        }
+    }
+]);
+
+
+
+
+
+db.menus.aggregate([
+    // { "$match": { "_id": 5 } },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "childs"
+        }
+    },
+    {
+        "$unwind": "$childs"
+    },
+    // { "$match": { "childs.value": "1" } },
+    {
+        "$group": {
+            "_id": "$_id",
+            "childs": {
+                "$push": "$childs"
+            }
+        }
+    }
+])
+
+
+
+
+
+db.menus.aggregate([
+    {$unwind: "$ParentId"
+    },
+    {$lookup: { 
+        from: "menus",
+        localField: "_id",
+        foreignField: "ParentId",
+        as: "childrenInfo"
+        }
+    },
+    {$group: {
+    _id: "$_id",  name: {$first: "$MenuName"
+            },
+       children: {$addToSet: {$arrayElemAt: [
+                        "$childrenInfo.MenuName",
+                        0
+                    ]
+                }
+            }
+        }
+    }
+]);
+
+db.menus.aggregate([
+    {
+        "$match": {
+            "ParentId": 0
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$_id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "SubMenu._id",
+            "foreignField": "ParentId",
+            "as": "SubMenu.SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "SubMenu.SubMenu._id",
+            "foreignField": "ParentId",
+            "as": "SubMenu.SubMenu.SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu.SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu.SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$group": {
+            "_id": "$_id",
+            'MenuName' : {$first:'$MenuName'
+            },
+            'Visible': {$first: true
+            },
+            "SubMenu": {
+                "$push": "$SubMenu"
+            }
+        }
+    }
+])
+
+
+
+
+{
+    "$project": {
+        "_id": 1, 'MenuName' : 1,
+        'Visible': 1,
+        "SubMenu": {
+            "$cond": [
+                {
+                    "$eq": [
+                        {
+                            "$ifNull": [
+                                "$SubMenu",
+                                []
+                            ]
+                        },
+                        []
+                    ]
+                },
+                {
+                    "$const": [
+                        {
+                            "deleted": false
+                        }
+                    ]
+                },
+                [
+                    "$SubMenu"
+                ]
+            ]
+        }
+    }
+},
+
+
+db.menus.aggregate([
+    {
+        "$match": {
+            "ParentId": 0
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$_id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "SubMenu._id",
+            "foreignField": "ParentId",
+            "as": "SubMenu.SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$group": {
+            "_id": "$_id",
+            'MenuName' : {$first:'$MenuName'
+            },
+            'Visible': {$first: true
+            },
+            "SubMenu": {
+                "$push": "$SubMenu"
+            }
+        }
+    },
+    {$project: {_id: 1,
+                 SubMenu: {$size: "$SubMenu"
+            }
+        }
+    },
+    {$match: {
+            "SubMenu": {$gt: 1
+            }
+        }
+    },
+])
+
+
+db.menus.aggregate([
+    {
+        "$match": {
+            "ParentId": 0
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$_id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "_id",
+            "foreignField": "ParentId",
+            "as": "SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$lookup": {
+            "from": "menus",
+            "localField": "SubMenu._id",
+            "foreignField": "ParentId",
+            "as": "SubMenu.SubMenu"
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$unwind": {
+            "path": "$SubMenu.SubMenu._id",
+            "preserveNullAndEmptyArrays": true
+        }
+    },
+    {
+        "$group": {
+            "_id": "$_id",
+                'MenuName': { $first: '$MenuName'
+            },
+                'Visible': { $first: false
+            },
+            "SubMenu": {
+                "$push": "$SubMenu"
+            }
+        }
+    }
+])
+
+
+
+
+
+
+
+    table.aggregate([
+    {
+            $graphLookup: {
+                from: "menus",
+            "startWith": "$_id",
+            "connectFromField": "_id",
+            "connectToField": "ParentId",
+            "as": "SubMenu",
+            "maxDepth": 1,
+            "depthField": "depth"
+        }
+    },
+    { $sort: { Order: 1
+        }
+    },
+    {
+        "$match": {
+            "ParentId": 0
+        }
+    }
+])
+
+
+
+           
+db.masters.find({
+    {
+        "Roles": {
+            "RoleId": 10
+        }
+    }
+},
+{
+    "Roles.$": 1
+})
+
+
+
+        "[{"_id":2,"MenuName":"Setings",
+            "SubMenu":[{"_id":3,"MenuName":"Users","SubMenu":[],
+                "Permission":{"FormPermissions":{"Add":true,"Edit":true,"View":true,"Report":true,"Delete":true},
+        "_id":"5b670902fd87b409c0d5f7a1","RoleId":1}}],"Permission":[]}]"

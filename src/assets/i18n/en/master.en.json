@@ -1,0 +1,16 @@
+{
+    "Master": {
+        "Title": "Master Data",
+        "FormName": "Name",
+        "Description": "Description",
+        "RouteUrl": "Route Url",
+        "_id": "Id",
+        "IsForm": "IsForm",
+        "IsData": "IsData",
+        "Category": "Category",
+        "Permissions": "Permissions",
+        "FieldSettings":"FieldSettings",
+        "FormView":"Form View",
+        "Type": "Type"
+    }
+}

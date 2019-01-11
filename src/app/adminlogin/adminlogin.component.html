@@ -1,0 +1,46 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>SignIn</h1>
+
+            <!-- Custom Success/Error Message -->
+            <div class="row show-hide-message">
+                <div [ngClass]="messageClass">
+                    {{ message }}
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form [formGroup]="form" role="form">
+<div class="form-content">
+                <!-- Email Input -->
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control input-underline input-lg" 
+                    formControlName="email" id="email" autocomplete="off" placeholder="email"
+                    />
+                    <!-- Validation -->
+                    <ul class="help-block">
+                        <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">Email is required</li>
+                        <li *ngIf="emailMessage">{{ emailMessage}}</li>
+                    </ul>
+
+                </div>
+                <!-- Password Field  -->
+                <div class="form-group">
+                    <div [ngClass]="{'has-error': form.controls.password.errors && form.controls.password.dirty, 'has-success': form.controls.password.valid && form.controls.password.dirty }">
+                        <input type="password"  autocomplete="off" name="password" class="form-control input-underline input-lg"
+                        id="password" placeholder="Password">
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">Password is required</li>
+                        </ul>
+                    </div>
+                </div></div>
+                <button class="btn rounded-btn"  [disabled]="!form.valid || processing" 
+                 (click)="onLoginSubmit()"> Log in </button>
+                &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+            </form>
+        </div>
+    </div>
+</div>

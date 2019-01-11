@@ -1,0 +1,38 @@
+<a href="javascript:void(0)" class="fa fa-plus pull-right" title="Add Role" [routerLink]="['/adminLayout/settings/roleform']">
+</a>
+<table class="table" #myDiv ngDefaultControl (window:scroll)="onScroll($event)">
+    <thead id='tbleHead' class="thead-light">
+        <tr>
+            <th scope="col">
+                <input type="checkbox" id="chkSelectAll" (change)="selectedAll()" />
+            </th>
+            <th scope="col">{{ 'Role.rolename' | translate }}</th>
+            <th scope="col">{{ 'CreatedBy' | translate }}</th>
+            <th scope="col">{{ 'CreatedDate' | translate }}</th>
+            <th scope="col">{{ 'ModifiedBy' | translate }}</th>
+            <th scope="col">{{ 'ModifiedDate' | translate }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of itemResults$|async" [style.height]="itemHeight + 'px'">
+            <td>
+                <input type="checkbox" name="chkTblMaster" id="chk{{item._id}}" (change)="selectedRecord($event,item._id)" value="{{item._id}}"
+                /> </td>
+            <td>{{item.rolename}}</td>
+            <td>{{item.CreatedBy}}</td>
+            <td> {{item.ModifiedBy}}</td>
+            <td>{{item.CreatedDate | date:'medium'}}</td>
+            <td>{{item.ModifiedDate| date:'medium'}}</td>
+            <td>
+                <a href="javascript:void(0)" class="fa fa-trash pull-right" title="Delete" (click)="onClick($event)"> </a>
+                <a class="fa fa-edit pull-right" title="Edit" [routerLink]="['/adminLayout/settings/roleform',{_id:item._id}]"> </a>
+                <a class="fa fa-user pull-right" title="Map User" [routerLink]="['/adminLayout/settings/maprole',{_id:item._id,role:item.rolename,type:'role'}]">
+                </a>
+                <a class="fa fa-cogs pull-right" title="Form Permissions" 
+                [routerLink]="['/adminLayout/settings/formpermissions',{_id:item._id,rolename:item.rolename}]">
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

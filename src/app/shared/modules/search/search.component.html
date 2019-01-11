@@ -1,0 +1,22 @@
+<div class="row pageSearch">
+  <span class="col-sm-12 col-xs-6 col-md-4 col-lg-4">
+    <select autofocus="autofocus" id="fieldname" class="hideLabel form-control" #fieldname>
+      <option *ngFor="let item of fields">
+        {{item}}
+      </option>
+    </select>
+  </span>
+  <span class="col-sm-12 col-xs-6 col-md-6 col-lg-6">
+    <span class="input-group">
+      <input id="txtSearch" type="text" (keyup)="EnableSearch()" class="form-control" #txtSearch aria-describedby="sizing‐addon2" placeholder="Search for...">
+     
+    </span><span class="help-block"></span>
+  </span>
+
+  <span class="col-sm-12 col-xs-12 col-md-2 col-lg-2">
+    <span class="input-group">
+      <label class="input-group-addon">Total : </label>
+      <span id="spanTotalRecords"> {{Total}}</span>
+    </span><span class="help-block"></span>
+  </span>
+</div>
