@@ -1,0 +1,75 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Role'" [icon]="'fa-list'">
+        Role
+    </app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="modal-title">{{ 'Role.Title' | translate }}</h4>
+                    <a class="btn btn-primary pull-right" href="Javascript:void(0)" [routerLink]="['/settings/role']">
+                        <i class="fa fa-list"></i>
+                    </a>
+                    <!-- <div class="btn-group btn-group-sm pull-right" role="group" aria-label="">
+                        <a class="btn btn-secondary" href="Javascript:void(0)" [routerLink]="['/components/masterform']">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a class="btn btn-secondary" (click)="deleteCustomer(index,cust._id);">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-secondary" (click)="open(content)">
+                            <i class=" fa fa-trash"></i>
+                        </a>
+
+                    </div> -->
+                </div>
+                <div class="card-body">
+                    <div class="row show-hide-message">
+                        <div [ngClass]="messageClass">
+                            {{ message }}
+                        </div>
+                    </div>
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <label for="_id">{{ 'Role.RoleId' | translate }}</label>
+                            <input type="number" style="display: block;" name="RoleId" class="form-control" [(ngModel)]="model._id" autocomplete="on"
+                                placeholder="*{{ 'Role.RoleId' | translate }}" formControlName="_id" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="decription">{{ 'Role.RoleParent' | translate }}</label>
+                            <select [(ngModel)]="model.roleparentid" formControlName="roleparentid" 
+                            id="roleparentid" #RoleParent class="hideLabel form-control" name="IdRole" 
+                            >
+                                <option selected="" value=""></option>
+                                <option [ngValue]="role._id" *ngFor="let role of roles">
+                                    {{role.rolename}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rolename">{{ 'Role.RoleName' | translate }}</label>
+                            <div>
+                                <input type="text" name="rolename" [(ngModel)]="model.rolename" class="form-control" autocomplete="on" placeholder="*{{ 'Master.Name' | translate }}"
+                                    formControlName="rolename" />
+                                <ul class="help-block">
+                                    <li *ngIf="form.controls.rolename.errors?.required && form.controls.rolename.dirty">This field is required</li>
+                                    <li *ngIf="form.controls.rolename.errors?.minlength && form.controls.rolename.dirty 
+                            || form.controls.rolename.errors?.maxlength && form.controls.rolename.dirty ">Minimum characters: 3, Maximum characters: 100</li>
+                                    <li *ngIf="nameMessage">{{ nameMessage }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="decription">{{ 'Role.RoleName' | translate }}</label>
+                            <input type="text" name="decription" class="form-control" 
+                            [(ngModel)]="model.decription" autocomplete="on" placeholder="*{{ 'Master.Description' | translate }}"
+                                formControlName="decription" />
+                        </div>
+                        <input (click)="onSubmit()" type="submit" class="btn btn-primary" value="{{ 'SaveBtn' | translate }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

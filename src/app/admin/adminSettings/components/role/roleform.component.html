@@ -1,0 +1,73 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Master'" [icon]="'fa-list'">
+    </app-page-header>
+    <form id='frmInfo' #frmInfo="ngForm" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        {{ 'Role.Title' | translate }}
+                        <div class="btn-group btn-group-sm pull-right" role="group" aria-label="">
+                            <a class="btn btn-primary" href="Javascript:void(0)" [routerLink]="['/settings/role']">
+                                <i class="fa fa-list"></i>
+                            </a>
+                            <button type="submit" [disabled]="!frmInfo.form.valid || forminvalid" class="btn btn-warning"><i
+                                    class="fa fa-save"></i></button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-refresh"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row show-hide-message">
+                            <div [ngClass]="messageClass"> {{ message }}</div>
+                        </div>
+                        <validation-summary [form]="frmInfo"></validation-summary>
+                        <input type="hidden" value="0" name="_id" [(ngModel)]="model._id" />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="decription">{{ 'Role.RoleParent' | translate }}</label>
+                                    <select [(ngModel)]="model.roleparentid" id="roleparentid" class="hideLabel form-control"
+                                        name="roleparentid">
+                                        <option selected="" value=""></option>
+                                        <option [ngValue]="role._id" *ngFor="let role of roles">
+                                            {{role.rolename}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rolename">{{ 'Role.RoleName' | translate }}</label>
+                                    <input type="text" name="rolename" required minlength="3" alphabetValid
+                                    maxlength="100" [(ngModel)]="model.rolename" class="form-control"
+                                        />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="decription">{{ 'Role.decription' | translate }}</label>
+                                    <input type="text" name="decription" maxlength="100" class="form-control" 
+                                    [(ngModel)]="model.decription"                                    />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                            <table class="table table-striped" style="display:block;width:100%;table-layout:fixed;">
+                                <thead>
+                                    <th colspan="2">Log</th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let item of model.Modified.slice().reverse(); let i=index">
+                                    <td>{{i + 1}}.</td>
+                                    <td>
+                                        {{item.ModifiedBy}}<br>
+                                        {{item.ModifiedDate | date:'medium'}}
+                                    </td>
+                                </tr></tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

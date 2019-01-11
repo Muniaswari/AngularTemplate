@@ -1,0 +1,12 @@
+{
+    "Menu": {
+        "Title": "Menu",
+        "MenuName": "Name",
+        "ParentId": "Parent Menu",
+        "RouteUrl": "Route Url",
+        "_id": "Id",
+        "Order": "Order",
+        "Icon":"Icon",
+        "LinkwithForm":"Link with Form"
+    }
+}

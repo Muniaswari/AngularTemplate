@@ -1,0 +1,61 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Master'" [icon]="'fa-list'">
+        Master
+    </app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">{{ 'Master.FieldSettings' | translate }} for {{formname}}
+                    <div class="btn-group btn-group-sm pull-right" role="group" aria-label="">
+                        <a class="btn btn-secondary" href="Javascript:void(0)" [routerLink]="['/settings/master']">
+                            <i class="fa fa-list"></i>
+                        </a>
+                        <a class="btn btn-secondary" href="Javascript:void(0)"                         >
+                            <i class="fa fa-save"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Include</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of list; " style="cursor: move" draggable="true" (dragenter)="dragenter($event)" (dragstart)="dragstart($event)">
+                                        <td> {{item}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="col-sm-4">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Exclude</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="cursor: move" draggable="true" (dragenter)="dragenter($event)" (dragstart)="dragstart($event)">
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="col-sm-4">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,81 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">Menu
+                    <div class="btn-group btn-group-sm pull-right" role="group" aria-label="">
+                        <a class="btn btn-secondary" href="Javascript:void(0)" [routerLink]="['/adminLayout/menu']">
+                            <i class="fa fa-list"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="panel">
+                        <div id="FrmNew" class="panel-body">
+                            <div class="row show-hide-message">
+                                <div>
+                                    {{ message }}
+                                </div>
+                            </div>
+                            <form [formGroup]="form">
+                                <div class="form-group">
+                                    <input type="number" value="0" name="RoleId" class="form-control" [(ngModel)]="model._id" autocomplete="on" placeholder="*{{ 'Role.RoleId' | translate }}"
+                                        formControlName="_id" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="ParentId">{{ 'Menu.ParentId' | translate }}</label>
+                                    <select [(ngModel)]="model.ParentId" formControlName="ParentId" id="ParentId" #ParentId class="hideLabel form-control" name="ParentId">
+                                        <option selected="" value="0"></option>
+                                        <option [ngValue]="item._id" *ngFor="let item of list">
+                                            {{item.MenuName}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="MenuName">{{ 'Menu.MenuName' | translate }}</label>
+                                    <input type="text" name="MenuName" autofocus="autofocus" class="form-control" autocomplete="on" placeholder="*{{ 'Menu.MenuName' | translate }}"
+                                        [(ngModel)]="model.MenuName" formControlName="MenuName" />
+                                    <ul class="help-block">
+                                        <li *ngIf="form.controls.MenuName.errors?.required && form.controls.MenuName.dirty">This field is required</li>
+                                        <li *ngIf="form.controls.MenuName.errors?.minlength && form.controls.MenuName.dirty
+                                                || form.controls.MenuName.errors?.maxlength && form.controls.MenuName.dirty">Minimum characters: 3, Maximum characters: 100</li>
+                                        <li *ngIf="form.controls.MenuName.errors?.alphaValid
+                                                  && form.controls.MenuName.dirty">Form Name must not have any special characters</li>
+                                        <li *ngIf="nameMessage">{{ nameMessage }}</li>
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ParentId">{{ 'Menu.LinkwithForm' | translate }}</label>
+                                    <select [(ngModel)]="model.LinkwithForm" *ngIf="formlist?.length" formControlName="LinkwithForm" id="LinkwithForm" #LinkwithForm
+                                        class="hideLabel form-control" name="LinkwithForm">
+                                        <option selected="" value="0"></option>
+                                        <option [ngValue]="item._id" *ngFor="let item of formlist">
+                                            {{item.FormName}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Icon">{{ 'Menu.Icon' | translate }}</label>
+                                    <input type="text" name="Icon" class="form-control" autocomplete="on" placeholder="*{{ 'Menu.Icon' | translate }}" [(ngModel)]="model.Icon"
+                                        formControlName="Icon" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="RouteUrl">{{ 'Menu.RouteUrl' | translate }}</label>
+                                    <input type="text" name="RouteUrl" class="form-control" autocomplete="on"
+                                     placeholder="*{{ 'Menu.RouteUrl' | translate }}"
+                                        [(ngModel)]="model.RouteUrl" formControlName="RouteUrl" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Order">{{ 'Menu.Order' | translate }}</label>
+                                    <input type="text" name="Order" class="form-control" autocomplete="on" placeholder="*{{ 'Menu.Order' | translate }}" [(ngModel)]="model.Order"
+                                        formControlName="Order" />
+                                </div>
+                                <input (click)="onSubmit()" type="submit" class="btn btn-primary" value="{{ 'SaveBtn' | translate }}" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

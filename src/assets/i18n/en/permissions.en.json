@@ -1,0 +1,10 @@
+{
+    "Permission": {
+        "Title": "Permission",
+        "Add": "Add",
+        "Edit": "Edit",
+        "Delete": "Delete",
+        "View": "View",
+        "Report": "Report"
+    }
+}
