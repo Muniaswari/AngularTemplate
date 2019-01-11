@@ -11,16 +11,12 @@ exports.Save = async function (req, res) {
     var connection = databse.getDatabaseConnection(req.headers['key-basedata']);
 
     var table = connection.model("FormDesign", _formdesigntable.formdesignSchema);
-    console.log("1");
     // Check if email was provided
     if (!req.body.Title) {
-        console.log("2");
         res.json({ success: false, message: 'You must provide an Title' }); // Return error
     } else {
-        console.log("3");
         // Check if username was provided
         if (!req.body.DesignContent) {
-            console.log("4");
             res.json({ success: false, message: 'You must provide a DesignContent' }); // Return error
         } else {
             let data = new table({
@@ -31,9 +27,8 @@ exports.Save = async function (req, res) {
                 FormContent: req.body.FormContent,
                 DesignContent: req.body.DesignContent,
                 CreatedBy: req.body.CreatedBy
-            }); console.log("5", data);
+            }); 
             await data.save((err) => {
-                console.log("6");
                 if (err) {
                     // Check if error is an error indicating duplicate account
                     if (err.Title === 11000) {
@@ -64,7 +59,6 @@ exports.Save = async function (req, res) {
             });
         }
     }
-
 };
 
 exports.Update = async function (req, res) {
@@ -98,7 +92,6 @@ exports.Update = async function (req, res) {
 };
 
 exports.Delete = async function (req, res) {
-    console.log("entry");
     var connection = databse.getDatabaseConnection(req.headers['key-basedata']);
     var table = connection.model("FormDesign", _formdesigntable.formdesignSchema);
     var mastertable = connection.model("Master", _masterSchema.masterdataSchema);
@@ -116,16 +109,12 @@ exports.Delete = async function (req, res) {
         });
     console.log(reference);
     if (reference === 0) {
-        console.log("up in");
         await table.updateMany({ "_id": { "$in": ids } },
             { "$set": { IsDeleted: true, DeletedBy: req.body.DeletedBy } })
             .then(function (res) {
-                console.log("s");
                 res.send({ success: true, message: 'Deleted successfully!' });
             })
             .catch((err) => {
-                console.log(err);
-                res.send({ success: false, message: err });
             });
     }
     else {
@@ -135,7 +124,6 @@ exports.Delete = async function (req, res) {
 
 exports.FindById = async function (req, res) {
     var _id = req.params._id;
-    console.log(req.params._id);
     var connection = databse.getDatabaseConnection(req.headers['key-basedata']);
     var table = connection.model("FormDesign", _formdesigntable.formdesignSchema);
 
@@ -153,7 +141,6 @@ exports.FindById = async function (req, res) {
             });
     }
     else {
-        console.log("2");
         await table.find({ IsDeleted: false, Active: true })
             .select({ _id: 1 })
             .sort({ _id: -1 })
@@ -166,7 +153,6 @@ exports.FindById = async function (req, res) {
                 res.json({ message: err });
             });
     }
-
 };
 
 exports.FindPageWise = async function (req, res) {
@@ -184,13 +170,11 @@ exports.FindPageWise = async function (req, res) {
 
         query = { IsDeleted: false };
         if (searchValue !== 'undefined' && searchValue !== "" && searchValue !== null) {
-            console.log("3");
             query[searchField] = new RegExp(searchValue, "i");
         }
 
         console.log(currPage);
         if (currPage == 1) {
-            console.log("counter in");
             total = await table.count(query)
                 .exec()
                 .then((info) => {
