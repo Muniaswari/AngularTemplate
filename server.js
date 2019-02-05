@@ -14,7 +14,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5001);
 
 //log writer
 var logDirectory = path.join(__dirname, 'log');
@@ -24,17 +24,10 @@ var logformat = ''
 morgan.format('logFormat', '"remote_addr": ":remote-addr", "remote_user": ":remote-user", "date": ":date[clf]", "method": ":method", "url": ":url", "http_version": ":http-version", "status": ":status", "result_length": ":res[content-length]", "referrer": ":referrer", "user_agent": ":user-agent", "response_time": ":response-time"');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 console.log(filenam);
-var accessLogStream = rfs(filenam, {  interval: '1d',   path: logDirectory});
+var accessLogStream = rfs(filenam, { interval: '1d', path: logDirectory });
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }));
 
-// Force HTTPS on Heroku
-if (app.get('env') === 'production') {
-  app.use(function (req, res, next) {
-    var protocol = req.get('x-forwarded-proto');
-    protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
-  });
-}
 
 // Should be placed before express.static
 app.use(compress({
@@ -43,12 +36,29 @@ app.use(compress({
   },
   level: 9
 }));
+console.log(process.env.NODE_ENV,app.get('env'));
+// Force HTTPS on Heroku
+if (app.get('env') === 'production') {
+    console.log("server in dev");
+  app.use(function (req, res, next) {
+    var protocol = req.get('x-forwarded-proto');
+    protocol == 'https' ? next() :
+      res.redirect('https://' + req.hostname + req.url);
+  });
+}
 
 app.use(express.static(path.join(__dirname, '/dist')));
 require('./server/routes')(app);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
+  app.use(express.static("."));
+  require('./server/routes')(app);
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+
 
 /*
  |--------------------------------------------------------------------------

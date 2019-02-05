@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class IDSettingsComponent {
     model = {
         _id: 0,
-        Fist: '',
+        First: '',
         Middle: '',
         Last: '',
         FormId: 0,
@@ -33,8 +33,8 @@ export class IDSettingsComponent {
 
     constructor(public constants: Constants,
         public formValidation: FormValidation,
-        private route: ActivatedRoute,
-        private _dataService: MenuService) {
+        private   route: ActivatedRoute,
+         private _dataService: MenuService) {
         this.LoadDropDown();
     }
 
@@ -51,7 +51,7 @@ export class IDSettingsComponent {
                     this.formlist = info.forms;
                     if (info.editmenu !== undefined && info.editmenu !== null) {
                         const forminfo = info.editmenu;
-                        this.model.Fist = forminfo.Fist;
+                        this.model.First = forminfo.Fist;
                         this.model.Middle = forminfo.Middle;
                         this.model.Last = forminfo.Last;
                         this.model.FormId = forminfo.FormId;
@@ -64,9 +64,9 @@ export class IDSettingsComponent {
                 error => this.msg = <any>error);
     } 
 
-    private save() {
+     save() {
         const forminfo = this.model;
-        this.model.Fist = forminfo.Fist;
+        this.model.First = forminfo.First;
         this.model.Middle = forminfo.Middle;
         this.model.Last = forminfo.Last;
         this.model.FormId = forminfo.FormId;
@@ -83,16 +83,16 @@ export class IDSettingsComponent {
         }
     }
 
-    private clearForm() {
+     clearForm() {
         this.model._id = 0
-        this.model.Fist = '';
+        this.model.First = '';
         this.model.Middle = '';
         this.model.Last = '';
         this.model.FormId = 0;
         this.LoadDropDown();
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (data.success) {
             this.clearForm();
             this.LoadDropDown();

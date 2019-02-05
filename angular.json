@@ -10,15 +10,38 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+        
           "options": {
+            "lazyModules": [""],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "src/polyfills.ts",       
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/web.config",
+              {
+                "glob": "server.js",
+                "input": "./",
+                "output": "/"
+              },
+              {
+                "glob": "en.json",
+                "input": "i18n",
+                "output": "i18n/"
+              },
+              {
+                "glob": "fr.json",
+                "input": "i18n",
+                "output": "i18n/"
+              },
+              {
+                "glob": "**/*",
+                "input": "server",
+                "output": "server/"
+              }
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
@@ -29,6 +52,7 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
+          
           },
           "configurations": {
             "production": {
@@ -41,6 +65,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -53,6 +78,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+              "proxyConfig": "proxy.conf.json",
             "browserTarget": "angular-architecture-patterns:build"
           },
           "configurations": {
@@ -101,8 +127,10 @@
             ]
           }
         }
+        
       }
     },
+    
     "angular-architecture-patterns-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
@@ -130,7 +158,9 @@
     }
   },
   "defaultProject": "angular-architecture-patterns",
+
   "schematics": {
+    
     "@schematics/angular:component": {
       "prefix": "app",
       "styleext": "scss"
@@ -138,5 +168,5 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
-  }
+  }  
 }

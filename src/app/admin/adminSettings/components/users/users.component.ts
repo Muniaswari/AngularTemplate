@@ -30,9 +30,9 @@ export class UsersComponent {
     usercategory;
 
     constructor(public constants: Constants,
-        private route: ActivatedRoute,
-        private modalService: NgbModal,
-        private _dataService: UserService) {
+        private   route: ActivatedRoute,
+        private     modalService: NgbModal,
+        private     _dataService: UserService) {
         this.usercategory = this.route.snapshot.paramMap.get('usercategory');
         this.getData();
     }
@@ -55,7 +55,7 @@ export class UsersComponent {
         this.searchField = info.field;
         this.getData();
     }
-    private getData() {
+     getData() {
         this._dataService.findUsers(this.currentPage, this.usercategory)
             .subscribe(data => {
                 const records = data.json();
@@ -79,7 +79,7 @@ export class UsersComponent {
         });
     }
 
-    private getDismissReason(reason: any): string {
+     getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -94,7 +94,7 @@ export class UsersComponent {
         this._dataService.getById(id)
             .subscribe(info => { this.data = info; });
     }
-    private selectRow($event) {
+     selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -114,11 +114,11 @@ export class UsersComponent {
         }
     }
 
-    private selectAll(checked) {
+     selectAll(checked) {
         this.IschkTbl = checked;
     }
 
-    private delete() {
+     delete() {
         console.log(this.idList);
 
         // this._dataService.delete(this.idList, { DeletedBy: localStorage.getItem('CurLoggedUser') })
@@ -135,7 +135,7 @@ export class UsersComponent {
         //     }, error => this.message = <any>error);
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (!data.success) {
             this.message = data.message;
         } else {

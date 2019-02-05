@@ -56,13 +56,13 @@ export class TableDesignComponent {
                 error => this.msg = <any>error);
     }
 
-    // private FindById( ) {
+    //  FindById( ) {
     //     this.message = '';
     //     this._dataService.getById( this.route.snapshot.paramMap.get('_id'))
     //         .subscribe(data => { this.model = data; }, error => this.msg = <any>error);
     // }
 
-    private deleteMaster(index: any, id: any) {
+     deleteMaster(index: any, id: any) {
         // this._dataService.delete(id)
         //     .subscribe(response => {
         //         this.list.splice(index, 1);
@@ -71,7 +71,7 @@ export class TableDesignComponent {
         //         error => this.msg = <any>error);
     }
 
-    private onSubmit() {
+     onSubmit() {
         this.processing = true;
         console.log(this.form.get('RouteUrl'));
         this.disableForm();
@@ -94,7 +94,7 @@ export class TableDesignComponent {
         }
     }
 
-    // private FindMaxId() {
+    //  FindMaxId() {
     //     return this._dataService.findMaxId()
     //         .subscribe(
     //             maxdata => {
@@ -105,7 +105,7 @@ export class TableDesignComponent {
     //             }                , error => this.msg = <any>error);
     // }
 
-    private createForm() {
+     createForm() {
         this.model = { _id: 0 };
         this.form = this.formBuilder.group({
             _id: [0],
@@ -124,18 +124,18 @@ export class TableDesignComponent {
         this.LoadDropDown();
     }
 
-    private disableForm() {
+     disableForm() {
         this.form.controls['MenuName'].disable();
         this.form.controls['ParentId'].disable();
         this.form.controls['LinkwithForm'].disable();
     }
 
-    private enableForm() {
+     enableForm() {
         this.form.controls['MenuName'].enable(); this.form.controls['LinkwithForm'].enable();
         this.form.controls['ParentId'].enable();
     }
 
-    private clearForm() {
+     clearForm() {
         this.model = {};
         this.nameMessage = '';
         this.form.controls['_id'].setValue(0);
@@ -148,7 +148,7 @@ export class TableDesignComponent {
         this.LoadDropDown();
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (!data.success) {
             this.message = data.message;
             this.processing = false;

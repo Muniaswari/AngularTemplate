@@ -19,13 +19,14 @@ export class RoleComponent implements OnInit {
     list: Array<any> = [];
     category = false;
     IschkTbl = false;
-    
+
     fields: any = ['rolename'];
     searchvalue = 'undefined';
     searchField = 'undefined';
-    constructor(public constants: Constants, private route: ActivatedRoute,
+    constructor(public constants: Constants, 
+        private route: ActivatedRoute,
         private _dataService: RoleService) {
-        this.getData() ;
+        this.getData();
     }
 
     search(info: any) {
@@ -47,29 +48,32 @@ export class RoleComponent implements OnInit {
             }
         }
     }
-
-    private getData() {
+    selectedAll()
+    {
+        
+    }
+    getData() {
         this._dataService.getPage(this.currentPage,
             this.searchField, this.searchvalue)
-        .subscribe(data => {
-            const records = data.json();
-            console.log(records);
+            .subscribe(data => {
+                const records = data.json();
+                console.log(records);
 
-            if (records !== null && records.Pages.length > 0) {
-                this.list = this.list.concat(records.Pages);
-            }
-            if (this.currentPage === 1) {
-                this.constants.RecordTotal = records.Total;
-            }
-            this.currentPage++;
-        }, error => this.message = <any>error);
-        
+                if (records !== null && records.Pages.length > 0) {
+                    this.list = this.list.concat(records.Pages);
+                }
+                if (this.currentPage === 1) {
+                    this.constants.RecordTotal = records.Total;
+                }
+                this.currentPage++;
+            }, error => this.message = <any>error);
+
     }
 
     public ngOnInit() {
     }
-    
-    private selectRow($event) {
+
+    selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -89,11 +93,11 @@ export class RoleComponent implements OnInit {
         }
     }
 
-    private selectAll(checked) {
+    selectAll(checked) {
         this.IschkTbl = checked;
     }
 
-    private delete() {
+    delete() {
         console.log(this.idList);
         this._dataService.delete(this.idList, { DeletedBy: localStorage.getItem('CurLoggedUser') })
             .subscribe(response => {
@@ -109,7 +113,7 @@ export class RoleComponent implements OnInit {
             }, error => this.message = <any>error);
     }
 
-    private saveResponse(data: any) {
+    saveResponse(data: any) {
         if (!data.success) {
             this.message = data.message;
         } else {

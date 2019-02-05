@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { FormBuilderModule } from './formbuilder/formbuilder.module';
-import { MenuModule } from './menu/menu.module'; 
-import { IDSettingsModule } from './IDSettings/IDSettings.module';
-import { AdminSettingsModule } from './adminSettings/adminSettings.module';
+
 const routes: Routes = [
     {
         path: '',
         component: AdminComponent,
         children: [
-            { path: '', redirectTo: 'dashboard' },
-            { path: 'dashboard', loadChildren: () => DashboardModule },
-            { path: 'menu', loadChildren: () => MenuModule },
-            { path: 'idsettings', loadChildren: () => IDSettingsModule },
-            { path: 'formbuilder', loadChildren: () => FormBuilderModule },
-            { path: 'settings', loadChildren: () => AdminSettingsModule }
+            { path: '', redirectTo: 'admindashboard' },
+            { path: 'admindashboard', loadChildren: './admindashboard/admindashboard.module#AdminDashboardModule' },
+            { path: 'menu', loadChildren: './menu/menu.module#MenuModule' },
+            { path: 'idsettings', loadChildren: './IDSettings/IDSettings.module#IDSettingsModule' },
+            { path: 'formbuilder', loadChildren: './formbuilder/formbuilder.module#FormBuilderModule' },
+            { path: 'settings', loadChildren: './adminSettings/adminSettings.module#AdminSettingsModule' }
         ]
     }
 ];

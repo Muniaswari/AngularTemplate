@@ -69,7 +69,7 @@ export class MenucreateComponent {
                 error => this.msg = <any>error);
     }
 
-    private checkDuplication() {
+     checkDuplication() {
         if (this.model.MenuName !== '') {
             this._dataService.checkDuplication(this.model.MenuName,
                 this.model._id).subscribe(data => {
@@ -87,7 +87,7 @@ export class MenucreateComponent {
         }
     }
 
-    private save() {
+     save() {
         const forminfo = this.model;
         this.model.LinkwithForm = forminfo.LinkwithForm;
         this.model.MenuName = forminfo.MenuName;
@@ -108,7 +108,7 @@ export class MenucreateComponent {
         }
     }
 
-    private clearForm() {
+     clearForm() {
         this.model._id = 0
         this.model.RouteUrl = '';
         this.model.Order = 0;
@@ -119,7 +119,7 @@ export class MenucreateComponent {
         this.LoadDropDown();
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (data.success) {
             this.clearForm();
             this.LoadDropDown();

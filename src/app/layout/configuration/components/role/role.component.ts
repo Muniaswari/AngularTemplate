@@ -18,7 +18,7 @@ export class RoleComponent implements OnInit {
     list: Array<any> = [];
     category = false;
     IschkTbl = false;
-
+    itemResults;
     fields: any = ['FormName'];
     searchvalue = 'undefined';
     searchField = 'undefined';
@@ -27,7 +27,8 @@ export class RoleComponent implements OnInit {
         private _dataService: RoleService) {
         this.getData();
     }
-
+    selectedAll()
+    {}
     onScroll(event: any) {
         if (((window.innerHeight + window.scrollY + 1) >= document.body.offsetHeight)
             || ((window.innerHeight + document.documentElement.scrollTop) >= document.body.offsetHeight)) {
@@ -40,7 +41,7 @@ export class RoleComponent implements OnInit {
         }
     }
 
-    private getData() {
+     getData() {
         this._dataService.getPage(this.currentPage,
             this.searchField, this.searchvalue)
             .subscribe(data => {

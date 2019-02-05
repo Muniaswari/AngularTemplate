@@ -11,7 +11,7 @@ import { ConfigurationComponent } from './configuration.component';
 import { TreeViewComponent } from '../components/treeview/treeview.component';
 import { UserRoleTreeComponent } from '../components/treeview/userRoletree.component';
 import {
-    RoleFormComponent,
+    RoleFormComponent, UserHomeComponent,
     RoleComponent,
     FieldSettingsComponent,
     UsersComponent,
@@ -43,7 +43,7 @@ import { MasterService } from '../../shared/services/master.service';
     declarations: [
         TreeViewComponent,
         RoleFormComponent,
-        RoleComponent,
+        RoleComponent, UserHomeComponent,
         UserRoleTreeComponent,
      ConfigurationComponent,
         UsersComponent,

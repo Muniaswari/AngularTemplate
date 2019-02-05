@@ -76,7 +76,7 @@ export class AdminLoginComponent  {
                 //  this.authService.storeUserData(data.token, data.user);
                 // After 2 seconds, redirect to dashboard page
                 //  setTimeout(() => {
-                this.router.navigate(['/adminLayout/dashboard']);
+                this.router.navigate(['/adminLayout/admindashboard']);
                 //   this.router.navigate(['/admin',user]);
             }
         });

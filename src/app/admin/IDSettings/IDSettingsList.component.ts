@@ -25,7 +25,7 @@ export class IDSettingsListComponent {
         private _dataService: MenuService) { this.LoadData() }
 
   
-     private selectRow($event) {
+      selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -45,11 +45,11 @@ export class IDSettingsListComponent {
         }
     }
 
-    private selectAll(checked) {
+     selectAll(checked) {
         this.IschkTbl = checked;
     }
 
-    private delete() {
+     delete() {
         console.log(this.idList);
         this._dataService.delete(this.idList, { DeletedBy: localStorage.getItem('CurLoggedUser') })
             .subscribe(response => {
@@ -64,7 +64,7 @@ export class IDSettingsListComponent {
             }, error => this.message = <any>error);
     }
 
-    private LoadData() {
+     LoadData() {
         this._dataService.findAll()
             .subscribe(data => {
                 this.list = data.json();

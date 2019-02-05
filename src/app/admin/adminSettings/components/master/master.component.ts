@@ -53,7 +53,7 @@ export class MasterComponent {
         }
     }
 
-    private getData() {
+     getData() {
         this._dataService.getPage(this.currentPage, this.category,
             this.searchField, this.searchvalue)
             .subscribe(data => {
@@ -70,7 +70,7 @@ export class MasterComponent {
             }, error => this.message = <any>error);
     }
 
-    private selectRow($event) {
+     selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -90,11 +90,11 @@ export class MasterComponent {
         }
     }
 
-    private selectAll(checked) {
+     selectAll(checked) {
         this.IschkTbl = checked;
     }
 
-    private delete() {
+     delete() {
         console.log(this.idList);
 
         this._dataService.delete(this.idList, { DeletedBy: localStorage.getItem('CurLoggedUser') })
@@ -111,7 +111,7 @@ export class MasterComponent {
             }, error => this.message = <any>error);
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (!data.success) {
             this.message = data.message;
         } else {

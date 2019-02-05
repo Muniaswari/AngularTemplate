@@ -25,11 +25,11 @@ export class FormPermissionComponent {
     IschkDelete = false;
     IschkRoles = false;
 
+    messageClass;
     model: any;
     msg: any;
     message;
     expanded = false;
-    //selectedRoleList: Array<any> = new Array<any>();
 
     userId: string;
     rolename: any;

@@ -35,9 +35,9 @@ export class MasterformComponent {
     // var b = !!"2"; // the !! converts truthy to true, and falsy to false
     // var s = ""+3; // the ""+ converts to string via toString()
     constructor(public constants: Constants,
-        private route: ActivatedRoute,
+      private   route: ActivatedRoute,
         public formValidation: FormValidation,
-        private _dataService: MasterService) {
+        private     _dataService: MasterService) {
         const id = this.route.snapshot.paramMap.get('_id');
         if (id !== undefined && id !== null) {
             this.model._id = Number(id);
@@ -69,20 +69,16 @@ export class MasterformComponent {
             }, error => { this.errorResponse(<any>error) });
     }
 
-    private errorResponse(err) {
+     errorResponse(err) {
         this.messageClass = 'alert alert-success';
         this.message = err;
     }
 
-    private save() {
+     save() {
         const forminfo = this.model;
         console.log(this.model);
-      //  this.model.FormName = forminfo.FormName;
-      //  this.model.Description = forminfo.Description;
-        //this.model.RouteUrl = forminfo.RouteUrl;
         this.model.IsForm = forminfo.IsForm;
         this.model.IsData = forminfo.IsData;
-     //   this.model.Category = forminfo.Category;
         if (this.model._id > 0) {
             this.model.ModifiedBy = localStorage.getItem('CurLoggedUser');
             this._dataService.update(forminfo._id, this.model)
@@ -95,7 +91,7 @@ export class MasterformComponent {
         }
     }
 
-    private checkDuplication() {
+     checkDuplication() {
         if (this.model.FormName !== '') {
             this._dataService.checkDuplication(this.model.FormName,
                 this.model._id).subscribe(data => {
@@ -112,14 +108,14 @@ export class MasterformComponent {
         }
     }
 
-    private saveResponse(data: any) {
+     saveResponse(data: any) {
         if (data.success) {
             this.clearForm();
         }
         alert(data.message);
     }
 
-    private showRoute($event) {
+     showRoute($event) {
         const target: any = $event.currentTarget;
         if (target.checked) {
             this.IsFormChecked = false;
@@ -128,7 +124,7 @@ export class MasterformComponent {
         }
     }
 
-    private clearForm() {
+     clearForm() {
         this.model._id = 0;
         this.model.FormName = '';
         this.model.Description = '';

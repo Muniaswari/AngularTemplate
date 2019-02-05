@@ -25,6 +25,7 @@ export class FormPermissionComponent {
     IschkDelete = false;
     IschkRoles = false;
 
+    messageClass;
     model: any;
     msg: any;
     message;

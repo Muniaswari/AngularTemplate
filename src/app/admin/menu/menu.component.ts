@@ -4,13 +4,6 @@ import { AuthService } from '../../shared/guard/auth.service';
 import { MenuService } from '../../shared/services/menu.service'
 import { Constants } from '../../shared/constants';
 import { ActivatedRoute } from '@angular/router';
-import * as $ from 'jquery';
-
-$('[data-toggle="collapse"]').on('click', function () {
-    alert("cli");
-    //   $(document).find()  ;
-    //  $(this).prevAll().addClass("active");
-});
 
 @Component({
     selector: 'app-menu',
@@ -54,7 +47,7 @@ export class MenuComponent {
             });
         }
     }
-     private selectRow($event) {
+      selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -74,11 +67,11 @@ export class MenuComponent {
         }
     }
 
-    private selectAll(checked) {
+     selectAll(checked) {
         this.IschkTbl = checked;
     }
 
-    private delete() {
+     delete() {
         console.log(this.idList);
         this._dataService.delete(this.idList, { DeletedBy: localStorage.getItem('CurLoggedUser') })
             .subscribe(response => {
@@ -93,7 +86,7 @@ export class MenuComponent {
             }, error => this.message = <any>error);
     }
 
-    private LoadData() {
+     LoadData() {
         this._dataService.findAll()
             .subscribe(data => {
                 this.menuList = data.json();

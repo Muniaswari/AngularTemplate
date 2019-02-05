@@ -30,7 +30,7 @@ export class FieldSettingsComponent {
         this.LoadData(this.formname);
     }
 
-    private LoadData(formname) {
+    LoadData(formname) {
         this._dataService.tableColumns(formname)
             .subscribe(data => {
                 const info = data.json();
@@ -50,13 +50,13 @@ export class FieldSettingsComponent {
             case 'includedown':
                 if (includedddl.length - 1 !== selectedIndex) {
                     includedddl.options[selectedIndex + 1].insertAdjacentElement('afterEnd',
-                     includedddl.selectedOptions[0]);
+                        includedddl.selectedOptions[0]);
                 }
                 break;
             case 'includeup':
                 if (selectedIndex > 0) {
-                    includedddl.options[selectedIndex - 1].insertAdjacentElement('beforeBegin', 
-                    includedddl.selectedOptions[0]);
+                    includedddl.options[selectedIndex - 1].insertAdjacentElement('beforeBegin',
+                        includedddl.selectedOptions[0]);
                 }
                 break;
             case 'right':
@@ -69,9 +69,8 @@ export class FieldSettingsComponent {
                 excludedddl = document.querySelector('#ddlExcluded');
                 selectedFields = excludedddl.selectedOptions;
                 selectedIndex = excludedddl.selectedIndex;
-                if (selectedFields.length > 0) 
-                { 
-                    includedddl.appendChild(selectedFields[0]) ;
+                if (selectedFields.length > 0) {
+                    includedddl.appendChild(selectedFields[0]);
                 };
                 break;
             case 'excludedown':
@@ -80,7 +79,7 @@ export class FieldSettingsComponent {
                 selectedIndex = excludedddl.selectedIndex;
                 if (excludedddl.length - 1 !== selectedIndex) {
                     excludedddl.options[selectedIndex + 1].insertAdjacentElement('afterEnd',
-                     excludedddl.selectedOptions[0]);
+                        excludedddl.selectedOptions[0]);
                 }
                 break;
             case 'excludeup':
@@ -89,7 +88,7 @@ export class FieldSettingsComponent {
                 selectedIndex = excludedddl.selectedIndex;
                 if (selectedIndex > 0) {
                     excludedddl.options[selectedIndex - 1].insertAdjacentElement('beforeBegin',
-                     excludedddl.selectedOptions[0]);
+                        excludedddl.selectedOptions[0]);
                 }
                 break;
             default:
@@ -108,7 +107,7 @@ export class FieldSettingsComponent {
         }
     }
 
-    private selectRow($event) {
+    selectRow($event) {
         const target: any = $event;
         const allcheckbox = document.querySelectorAll('input.chkTbl').length;
         const chk: any = document.querySelector('input#chkSelectAll');
@@ -122,8 +121,7 @@ export class FieldSettingsComponent {
 
     }
 
-    private selectAll(checked) {
+    selectAll(checked) {
         this.IschkFormTbl = checked;
-
     }
 }

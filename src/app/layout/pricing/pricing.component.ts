@@ -25,7 +25,7 @@ export class PricingComponent implements OnInit {
     form: FormGroup;
     model: any;
     countries: Array<any>[];
-
+    messageClass;
     constructor(private authService: AuthService,
         private formBuilder: FormBuilder,
         private _formValidation: FormValidation,
@@ -47,7 +47,7 @@ export class PricingComponent implements OnInit {
                 error => this.msg = <any>error);
     }
 
-    private createForm() {
+     createForm() {
         this.model = { _id: 0 };
         this.form = this.formBuilder.group({
             _id: [0],
@@ -108,6 +108,9 @@ export class PricingComponent implements OnInit {
         });
 
     }
+
+    checkEmail()
+    {}
     // LoadUsers(): void {
     //     this._dataService.get()
     //         .subscribe(customers => { this.customers = customers; },

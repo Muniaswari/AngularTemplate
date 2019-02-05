@@ -71,11 +71,7 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="heading">Selected Users</label>
-                            <div class="alert alert-info" role="alert" *ngIf="indLoading">
-                                <img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
-                            <div *ngIf='selectedUserList && selectedUserList.length==0' class="alert alert-info" role="alert">No record found!</div>
-
+                            <label class="heading">Selected Users</label>                            
                             <table class="table table-bordered table-hover" #tblSelectedUsers *ngIf='selectedUserList && selectedUserList.length>0'>
                                 <tr *ngFor="let item of selectedUserList;">
                                     <td class="HideRow">{{item._id}}</td>

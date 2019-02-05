@@ -1,6 +1,6 @@
 <div id="disableview" [class.disableCtrl]="disableView">
     <div [@routerTransition]>
-        <app-page-header [heading]="Users" [icon]="'fa-list'"></app-page-header>
+        <app-page-header [heading]="'Users'" [icon]="'fa-list'"></app-page-header>
 
         <div class="row">
             <div class="col-sm-12">
@@ -10,10 +10,7 @@
                     <!-- Large modal -->
                     <div class="card-body">
                         <div class='table-responsive'>
-                            <div class="alert alert-info" role="alert" *ngIf="indLoading">
-                                <img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
-                            <div *ngIf='news && news.length==0' class="alert alert-info" role="alert">No record found!</div>
-                            <table class="table table-bordered" (window:scroll)="onScroll($event)" #myDiv ngDefaultControl>
+                          <table class="table table-bordered" (window:scroll)="onScroll($event)" #myDiv ngDefaultControl>
                                 <thead>
                                     <tr>
                                         <th>{{ 'Users.Id' | translate }}</th>

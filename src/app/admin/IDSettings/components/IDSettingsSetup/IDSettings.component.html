@@ -25,9 +25,9 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="ParentId">{{ 'Menu.ParentId' | translate }}</label>
-                                            <select autofocus="autofocus" [(ngModel)]="model.ParentId" id="ParentId"
-                                                #ParentId class="hideLabel form-control" name="ParentId">
+                                            <label for="First">{{ 'Menu.First' | translate }}</label>
+                                            <select autofocus="autofocus" [(ngModel)]="model.First" id="First"
+                                                class="hideLabel form-control" name="First">
                                                 <option selected="" value="0"></option>
                                                 <option [ngValue]="item._id" *ngFor="let item of list">
                                                     {{item.First}}
@@ -38,8 +38,8 @@
                                             <label for="First">{{ 'Menu.First' | translate }}</label>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <select autofocus="autofocus" id="ParentId" #ParentId class="hideLabel form-control"
-                                                        name="ParentId">
+                                                    <select autofocus="autofocus" id="FirstCategory"
+                                                    class="hideLabel form-control"                                                        name="FirstCategory">
                                                         <option selected="" value="0">Numeric</option>
                                                         <option selected="" value="1">Alphabets</option>
                                                         <option selected="" value="2">Alpha Numeric</option>
@@ -57,8 +57,8 @@
                                             <label for="Middle">{{ 'Menu.Middle' | translate }}</label>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <select autofocus="autofocus" id="ParentId" #ParentId class="hideLabel form-control"
-                                                        name="ParentId">
+                                                    <select autofocus="autofocus" id="MiddleCategory" class="hideLabel form-control"
+                                                        name="MiddleCategory">
                                                         <option selected="" value="0">Numeric</option>
                                                         <option selected="" value="1">Alphabets</option>
                                                         <option selected="" value="2">Alpha Numeric</option>
@@ -75,8 +75,8 @@
                                             <label for="Last">{{ 'Menu.Last' | translate }}</label>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <select autofocus="autofocus" id="ParentId" #ParentId class="hideLabel form-control"
-                                                        name="ParentId">
+                                                    <select autofocus="autofocus" id="LastCategory" class="hideLabel form-control"
+                                                        name="LastCategory">
                                                         <option selected="" value="0">Numeric</option>
                                                         <option selected="" value="1">Alphabets</option>
                                                         <option selected="" value="2">Alpha Numeric</option>
