@@ -47,11 +47,11 @@ if (app.get('env') === 'production') {
   });
 }
 
-app.use(express.static(path.join(__dirname, '/dist')));
-require('./server/routes')(app);
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '/dist')));
+// require('./server/routes')(app);
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'dist/index.html'));
+// });
 
   app.use(express.static("."));
   require('./server/routes')(app);

@@ -3,14 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-architecture-patterns": {
+    "AngularTemplates": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-        
+          "builder": "@angular-devkit/build-angular:browser",        
           "options": {
             "lazyModules": [""],
             "outputPath": "dist",
@@ -51,8 +50,7 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
-          
+            ]          
           },
           "configurations": {
             "production": {
@@ -79,18 +77,18 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
               "proxyConfig": "proxy.conf.json",
-            "browserTarget": "angular-architecture-patterns:build"
+            "browserTarget": "AngularTemplates:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-architecture-patterns:build:production"
+              "browserTarget": "AngularTemplates:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-architecture-patterns:build"
+            "browserTarget": "AngularTemplates:build"
           }
         },
         "test": {
@@ -126,12 +124,10 @@
               "**/node_modules/**"
             ]
           }
-        }
-        
+        }        
       }
-    },
-    
-    "angular-architecture-patterns-e2e": {
+    },    
+    "AngularTemplates-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -140,7 +136,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-architecture-patterns:serve"
+            "devServerTarget": "AngularTemplates:serve"
           }
         },
         "lint": {
@@ -157,10 +153,8 @@
       }
     }
   },
-  "defaultProject": "angular-architecture-patterns",
-
-  "schematics": {
-    
+  "defaultProject": "AngularTemplates",
+  "schematics": {    
     "@schematics/angular:component": {
       "prefix": "app",
       "styleext": "scss"
