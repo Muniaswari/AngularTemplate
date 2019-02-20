@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Config } from '../app.config';
 @Injectable()
 export class Constants {
 
-    public serverUrl = environment.baseApiUrl;
+    //public serverUrl = environment.baseApiUrl;
+    public serverUrl = this.config.get("apiurl");
     public redirectURI: string = this.serverUrl + '/admin';
 
     public defaultdatabase = 'OAuth';
@@ -27,6 +29,6 @@ export class Constants {
     public RecordTotal = 0;
     public formId: string;
     public formPermssions: any;
-    constructor() {
+    constructor(public config:Config) {
     }
 }

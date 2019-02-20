@@ -9,8 +9,7 @@
   },
 
   "localization": {
-    "languages": [
-     
+    "languages": [     
       {"code": "en", "name": "EN", "culture": "en-EN"},
        {"code": "hr", "name": "HR", "culture": "hr-HR"}
     ],

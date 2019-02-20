@@ -36,6 +36,7 @@
                 "input": "i18n",
                 "output": "i18n/"
               },
+              
               {
                 "glob": "**/*",
                 "input": "server",

@@ -3,10 +3,10 @@ module.exports = {
   //MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost/OAuth',
   default: 'MONGO_URI',
   SERVER: process.env.SERVER || 'mongodb://localhost:27017/',
-  MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/OAuth',
-  DefaultDatabse: process.env.DefaultDatabse ||   'OAuth',
+  MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/OAuthTest',
+  DefaultDatabse: process.env.DefaultDatabse ||   'OAuthTest',
   //DefaultClientDatabse: process.env.DefaultClientDatabse || 'OAuthClient',
-  ADMINMONGO_URI: process.env.ADMINMONGO_URI || 'mongodb://localhost:27017/OAuthMaster',
+  ADMINMONGO_URI: process.env.ADMINMONGO_URI || 'mongodb://localhost:27017/OAuthMasterTest',
   ADMINTOKEN_SECRET: process.env.TOKEN_SECRET || 'MyNameIsAdMiN',
    TOKEN_SECRET: process.env.TOKEN_SECRET || 'MyNameIs',
 

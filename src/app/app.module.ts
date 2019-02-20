@@ -31,7 +31,7 @@ import { Constants } from './shared/constants';
 import { ServerURLInterceptor } from './shared/guard/interceptor';
 import { AuthorizationHeader } from './shared/common/authorizationHeader';
 import { AppErrorHandler } from './shared/errorhandling/global-error-handler';
-
+import { Config } from './app.config';
 
 export function interceptorFactory(xhrBackend: XHRBackend,
   requestOptions: RequestOptions,
@@ -43,6 +43,11 @@ export function interceptorFactory(xhrBackend: XHRBackend,
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './i18n/', '.json');
 }
+
+// export function initializeApp(appConfig: AppConfig) {
+//   return () => appConfig.load();
+// }
+
 @NgModule({
   imports: [
     NgbModule.forRoot(),
@@ -68,7 +73,14 @@ export function createTranslateLoader(http: HttpClient) {
     HomeComponent
   ],
   exports: [TranslateModule],
-  providers: [AuthService,
+  providers: [    
+    {
+      provide: Config,
+      useFactory: () => Config.getInstance()
+    //  deps: [Config], multi: true
+    },
+    //{ provide: Config, useFactory: () => Config.getInstance('./assets/appconfig/appconfig.json') },
+    AuthService,
     CommunicationService,
     UserPermissionsService,
     AdminAuthService,
@@ -76,7 +88,7 @@ export function createTranslateLoader(http: HttpClient) {
     FormValidation,
     CustomerService,
     AuthorizationHeader,
-    Constants,
+    Constants,    
     { provide: ErrorHandler, useClass: AppErrorHandler },
     ServerURLInterceptor,
     {

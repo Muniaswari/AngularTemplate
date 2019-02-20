@@ -40,7 +40,7 @@ function setEnvironment(configPath, environment) {
 }
 
 // Set environment variable to "production"
-setEnvironment('./src/config/env.json', 'production');
+setEnvironment('./src/config/env.json', 'development');
 
 // Merge all localization files into one
 mergeAndSaveJsonFiles(localizationSourceFilesEN, "./i18n/en.json");
