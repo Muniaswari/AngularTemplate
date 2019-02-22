@@ -20,7 +20,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.set('port', process.env.PORT || 5001);
+app.set('port', process.env.PORT || 8080);
 
 
 

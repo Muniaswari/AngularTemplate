@@ -6,6 +6,7 @@
   "author": "Ante Burazer <aburazer@netmedia.hr>",
   "angular-cli": {},
   "scripts": {
+    "deploy": "gcloud app deploy",
     "start": " npm run sy-pre-start  & ng build && set NODE_ENV=production && node server.js",
     "lint": "ng lint",
     "test": "npm run sy-pre-test & ng test",

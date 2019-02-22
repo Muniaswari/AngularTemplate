@@ -1,4 +1,4 @@
 {
     "env": "development",
-    "apiurl": "http://192.168.42.118:5001"
+    "apiurl": "http://192.168.42.118:8080"
 }
