@@ -14,4 +14,6 @@
 # [START gae_quickstart_yaml]
 runtime: nodejs8
 
+env_variables:
+  API_KEY: AIzaSyDj6E9V8PpmptOWpfkhIQ0ZGD1rQotMWw0
 # [END gae_quickstart_yaml]
